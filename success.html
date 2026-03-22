@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Successful!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Animated Background Circles */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .bg-circle:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .bg-circle:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .bg-circle:nth-child(3) {
+            width: 100px;            height: 100px;
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .success-container {
+            background: white;
+            border-radius: 30px;
+            padding: 40px 30px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.5s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleIn 0.5s ease-out 0.3s both;
+            box-shadow: 0 10px 30px rgba(56, 239, 125, 0.4);
+        }
+
+        @keyframes scaleIn {
+            from {                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .success-icon svg {
+            width: 70px;
+            height: 70px;
+            fill: white;
+            animation: checkmark 0.5s ease-out 0.6s both;
+        }
+
+        @keyframes checkmark {
+            from {
+                stroke-dashoffset: 100;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .congrats-text {
+            font-size: 32px;
+            font-weight: bold;
+            color: #11998e;
+            margin-bottom: 10px;
+            animation: fadeIn 0.5s ease-out 0.8s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .success-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease-out 1s both;
+        }
+
+        .order-details {
+            background: #f8f9fa;
+            border-radius: 15px;            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+            animation: fadeIn 0.5s ease-out 1.2s both;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .detail-value {
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .detail-value.highlight {
+            color: #11998e;
+            font-size: 18px;
+        }
+
+        .message {
+            color: #666;
+            font-size: 15px;
+            margin: 20px 0;
+            line-height: 1.6;
+            animation: fadeIn 0.5s ease-out 1.4s both;
+        }
+
+        .btn-ok {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 600;            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(56, 239, 125, 0.3);
+            transition: all 0.3s;
+            animation: fadeIn 0.5s ease-out 1.6s both;
+        }
+
+        .btn-ok:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(56, 239, 125, 0.4);
+        }
+
+        .btn-ok:active {
+            transform: translateY(-1px);
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Circles -->
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
+
+    <div class="success-container">
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+        </div>
+        <h1 class="congrats-text">🎉 Congratulations!</h1>
+        <h2 class="success-title">Order Placed Successfully</h2>
+
+        <div class="order-details" id="orderDetails">
+            <!-- Order details will be inserted here -->
+        </div>
+
+        <p class="message">
+            Thank you for your order! We'll process it soon.<br>
+            You can view your order in the dashboard.
+        </p>
+
+        <button class="btn-ok" onclick="goToAdmin()">OK</button>
+    </div>
+
+    <script>
+        // Load order details
+        window.addEventListener('load', function() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const latestOrder = orders[orders.length - 1];
+
+            if (latestOrder) {
+                document.getElementById('orderDetails').innerHTML = `
+                    <div class="detail-row">
+                        <span class="detail-label">Order ID</span>
+                        <span class="detail-value">#${latestOrder.id}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Customer</span>
+                        <span class="detail-value">${latestOrder.customerName}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Product</span>
+                        <span class="detail-value">${latestOrder.product.name}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Amount</span>
+                        <span class="detail-value highlight">₹${latestOrder.product.price}</span>
+                    </div>
+                `;
+            }
+
+            // Create confetti
+            createConfetti();
+        });
+
+        function createConfetti() {
+            const colors = ['#11998e', '#38ef7d', '#fff', '#ffd700', '#ff6b6b'];
+            
+            for (let i = 0; i < 50; i++) {                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.opacity = Math.random();
+                    document.body.appendChild(confetti);
+
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 4000);
+                }, i * 50);
+            }
+        }
+
+        function goToAdmin() {
+            window.location.href = 'admin-panel.html';
+        }
+    </script>
+</body>
+</html>
